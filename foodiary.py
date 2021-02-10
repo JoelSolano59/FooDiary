@@ -3,15 +3,19 @@ FooDiary 2020
 Joel Isaias Solano Ocampo
 """
 
-from os import system
+from os import system       #librerias para limpiar y pausar consola.
 import sys
+from datetime import date   #libreria para obtener la fecha actual.
+import csv                  #libreria para manejar archivos csv.
 
-m = []
+m = []                      #inicializando matriz.
+today = date.today()        #asignando la fecha de hoy a la variable today.
 
 # Funcion principal para desplegar el menu
 def main():
     while True:
         system("cls")
+        print("Hoy es:", today)
         print("""
 
 ╭━━━╮╱╱╱╱╱╭━━━╮
@@ -23,16 +27,18 @@ def main():
 ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╭━╯┃
 ╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╱╰━━╯
         """)
-        apartado(["1) Registrar alimento(s)","2) Ayuda","3) Acerca de", "4) Salir"])
+        apartado(["1) Registrar alimento(s)","2) Ver registro alimenticio","3) Ayuda","4) Acerca de", "5) Salir"])
         opc = input("\nElige una opción: ")
         system("cls")
         if opc == "1":
             print("registrar()")
         elif opc == "2":
-            ayuda()
+            print("ver()")
         elif opc == "3":
-            acerca()
+            ayuda()
         elif opc == "4":
+            acerca()
+        elif opc == "5":
             mensaje("Gracias por usar FooDiary. ¡Vuelve pronto!")
             break
         else:
@@ -109,7 +115,7 @@ def acerca():
 def archivo(matriz):
     with open("historial_alimentos.csv","w") as inputFile:
         fecha = input("Ingresa la fecha de hoy (dd/mm/yyyy): ")
-        Hora = input("Ingresa la hora (hh/mm): ")
+        hora = input("Ingresa la hora (hh/mm): ")
         header = "Fecha,Hora"
         for i in range(len(matriz)):
             header += ","+"Alimento "+str(i+1)
